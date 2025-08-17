@@ -20,9 +20,9 @@ android.archs = arm64-v8a, armeabi-v7a
 log_level = 2
 
 [android]
-android.api = 34
+android.api = 33
 android.minapi = 24
-android.sdk = 34
+android.sdk = 33
 # 若需直接写外部存储，建议后续接入 SAF（androidstorage4kivy）
 # android.permissions = READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE
 # targetSandboxVersion 等高级设置按需开启
