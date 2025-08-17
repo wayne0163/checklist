@@ -1,0 +1,52 @@
+name: Android Debug APK
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '**/*.py'
+      - 'buildozer.spec'
+      - '.github/workflows/android-debug.yml'
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Prepare cache directories
+        run: |
+          mkdir -p .ci-cache/buildozer .ci-cache/gradle
+
+      - name: Cache Buildozer data
+        uses: actions/cache@v3
+        with:
+          path: .ci-cache/buildozer
+          key: ${{ runner.os }}-buildozer-${{ hashFiles('buildozer.spec') }}
+
+      - name: Cache Gradle data
+        uses: actions/cache@v3
+        with:
+          path: .ci-cache/gradle
+          key: ${{ runner.os }}-gradle-${{ hashFiles('buildozer.spec') }}
+
+      - name: Pull buildozer image
+        run: docker pull kivy/buildozer
+
+      - name: Build debug APK
+        run: |
+          docker run --rm \
+            -v "$PWD":/home/user/app \
+            -w /home/user/app \
+            -v "$PWD/.ci-cache/buildozer":/home/user/.buildozer \
+            -v "$PWD/.ci-cache/gradle":/home/user/.gradle \
+            kivy/buildozer buildozer android debug
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-debug-apk
+          path: bin/*-debug.apk
+          if-no-files-found: error
+          retention-days: 7

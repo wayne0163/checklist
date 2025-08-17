@@ -1,0 +1,35 @@
+# OS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+env/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.coverage
+coverage.xml
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Editors
+.idea/
+.vscode/
+
+# Android/Buildozer caches
+.buildozer/
+.gradle/
+.ci-cache/
+bin/
+
+# App data
+*.db
+*.log
