@@ -1,7 +1,7 @@
 Build Android APK with GitHub Actions
 
 Overview
-- This repository includes a workflow at `.github/workflows/android-debug.yml` that builds a Kivy/KivyMD Android debug APK in the cloud using the official `kivy/buildozer` Docker image and uploads the built APK as an artifact.
+- This repository includes a workflow at `.github/workflows/android-debug.yml` that builds a Kivy/KivyMD Android debug APK in the cloud using Buildozer directly on the GitHub Ubuntu runner (no Docker), and uploads the built APK as an artifact.
 
 How to use
 - Push your code to GitHub (or create the repository if you haven't).
@@ -15,7 +15,7 @@ Artifacts
 - Download and share the `*-debug.apk` file with testers/friends.
 
 Caching
-- The workflow mounts `.ci-cache/buildozer` and `.ci-cache/gradle` into the container and caches them across runs to speed up subsequent builds.
+- The workflow caches `~/.buildozer` and `~/.gradle` across runs to speed up subsequent builds.
 
 Notes
 - This is a debug build (already debug-signed). Suitable for personal testing and sharing outside app stores.
