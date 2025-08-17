@@ -5,7 +5,6 @@ A simple pre-trade checklist app built with Kivy + KivyMD. Stores answers in a l
 ## Android Builds
 
 - Cloud build with GitHub Actions: see `CI-ANDROID.md`.
-- Local Docker build (optional): see `ANDROID-DOCKER.md`.
 
 ## Run Locally (Desktop)
 

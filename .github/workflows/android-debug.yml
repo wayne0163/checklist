@@ -11,6 +11,7 @@ on:
 jobs:
   build-android:
     runs-on: ubuntu-latest
+    timeout-minutes: 120
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -49,4 +50,17 @@ jobs:
           name: android-debug-apk
           path: bin/*-debug.apk
           if-no-files-found: error
+          retention-days: 7
+
+      - name: Always upload build logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-logs
+          path: |
+            buildozer.log
+            .buildozer/**/*.log
+            .buildozer/**/logs/**
+            bin/*-debug.apk
+          if-no-files-found: ignore
           retention-days: 7
